@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchCarModels } from "../services/api";
 import { Typography, Box } from "@mui/material";
+import { Car } from "../../../types/carTypes";
+import { fetchCarModels } from "../../../services/api";
 import CarDetailPresentation from "../components/CarDetailPresentation";
 import Carrousel from "../components/Carrousel";
 import CarExtraInfo from "../components/CarExtraInfo";
-import { Car } from "../types/carTypes";
 
 const CarDetails = () => {
   const { id } = useParams();

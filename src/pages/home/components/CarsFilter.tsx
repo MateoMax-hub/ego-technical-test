@@ -1,7 +1,7 @@
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material"
-import { FiltersEnum } from "../constants/FiltersEnum"
 import { useState } from "react"
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { FiltersEnum } from "../../../constants/FiltersEnum";
 
 const CarsFilter = () => {
   const [filterSelected, setFilterSelected] = useState<FiltersEnum>(FiltersEnum.ALL)

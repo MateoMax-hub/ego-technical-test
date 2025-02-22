@@ -1,6 +1,6 @@
 import Slider from 'react-slick';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
-import { CARROUSEL_CARDS } from '../constants/cars';
+import { CARROUSEL_CARDS } from '../../../constants/cars';
 
 const settings = {
   dots: true,
