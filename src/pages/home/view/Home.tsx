@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchCarModels } from "../services/api";
 import { Typography, Box } from "@mui/material";
+import { fetchCarModels } from "../../../services/api";
+import { Car } from "../../../types/carTypes";
 import HomeFilters from "../components/HomeFilters";
 import CarsGrid from "../components/CarsGrid";
-import { Car } from "../types/carTypes";
 
 const Home = () => {
   const [cars, setCars] = useState<Car[]>([]);
