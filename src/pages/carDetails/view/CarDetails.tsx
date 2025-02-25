@@ -1,30 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Typography, Box } from "@mui/material";
-import { Car } from "../../../types/carTypes";
-import { fetchCarModels } from "../../../services/api";
 import CarDetailPresentation from "../components/CarDetailPresentation";
 import Carrousel from "../components/Carrousel";
 import CarExtraInfo from "../components/CarExtraInfo";
+import { useFetchCarsDetails } from "../../../services/api";
 
 const CarDetails = () => {
   const { id } = useParams();
-  const [car, setCar] = useState<Car | undefined>(undefined);
-
-  useEffect(() => {
-    fetchCarModels().then((data) => {
-      const foundCar = (data as Car[]).find((c) => c.id === parseInt(id || "0"));
-      setCar(foundCar);
-    });
-  }, [id]);
-
-  if (!car) return <Typography>Cargando...</Typography>;
+  const { data: car, isLoading, error } = useFetchCarsDetails(id)
+  
+  if (isLoading) return <Typography>Cargando...</Typography>;
+  if (error || !car) return <Typography>Error: {error}</Typography>;
 
   return (
     <Box sx={{ width: '100%', paddingTop: '80px' }}>
       <CarDetailPresentation car={car}/>
-      <Carrousel />
-      <CarExtraInfo />
+      <Carrousel car={car}/>
+      <CarExtraInfo car={car}/>
     </Box>
   );
 };

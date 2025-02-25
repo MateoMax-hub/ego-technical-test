@@ -76,18 +76,9 @@ p {
   .tab_disable {
     display: none;
   }
-  .carExtraInfo > div:first-child {
+  .carExtraInfo > div {
     flex-direction: column-reverse;
     & > div:first-child {
-      padding: 0 0 4rem 0;
-      & > div {
-        width: unset;
-      }
-    }
-  }
-  .carExtraInfo > div:last-child {
-    flex-direction: column;
-    & > div:last-child {
       padding: 0 0 4rem 0;
       & > div {
         width: unset;

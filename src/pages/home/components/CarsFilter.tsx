@@ -1,10 +1,15 @@
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material"
 import { useState } from "react"
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { FiltersEnum } from "../../../constants/FiltersEnum";
+import { FiltersEnum, FiltersToApiResponseEnum } from "../../../constants/FiltersEnum";
 
-const CarsFilter = () => {
-  const [filterSelected, setFilterSelected] = useState<FiltersEnum>(FiltersEnum.ALL)
+const CarsFilter = ({
+  carFilterSelected,
+  setCarFilterSelected
+}: {
+  carFilterSelected: FiltersToApiResponseEnum;
+  setCarFilterSelected: React.Dispatch<React.SetStateAction<FiltersToApiResponseEnum>>
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
   const open = Boolean(anchorEl);
 
@@ -16,20 +21,25 @@ const CarsFilter = () => {
     setAnchorEl(null);
   };
 
+  const handleSelect = (filter: FiltersToApiResponseEnum) => {
+    setCarFilterSelected(filter)
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <div className="home_filters">
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography sx={{ fontWeight: 600, fontSize: '14px' }}>Filtrar por</Typography>
-            {Object.values(FiltersEnum).map(text => (
+            {Object.entries(FiltersEnum).map(([key, text]) => (
               <Typography
                 key={text}
-                onClick={() => setFilterSelected(text)}
+                onClick={() => setCarFilterSelected(FiltersToApiResponseEnum[key as keyof typeof FiltersToApiResponseEnum])}
                 sx={{
                   marginLeft: '50px',
                   cursor: "pointer",
-                  fontWeight: filterSelected === text ? 500 : 400,
-                  color: filterSelected === text ? "black" : "#373737",
+                  fontWeight: carFilterSelected === FiltersToApiResponseEnum[key as keyof typeof FiltersToApiResponseEnum] ? 500 : 400,
+                  color: carFilterSelected === FiltersToApiResponseEnum[key as keyof typeof FiltersToApiResponseEnum] ? "black" : "#373737",
                   "&:hover": { color: "black" },
                 }}
               >
@@ -59,7 +69,7 @@ const CarsFilter = () => {
             'aria-labelledby': 'filter-btn',
           }}
         >
-          {Object.values(FiltersEnum).map(text => <MenuItem onClick={handleClose}>{text}</MenuItem>)}
+          {Object.entries(FiltersEnum).map(([key, text]) => <MenuItem onClick={() => handleSelect(FiltersToApiResponseEnum[key as keyof typeof FiltersToApiResponseEnum])}>{text}</MenuItem>)}
         </Menu>
       </div>
     </>
