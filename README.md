@@ -24,7 +24,11 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
    ```sh
    npm install
    ```
-4. Inicia el servidor de desarrollo:
+4. Crear el archivo .env, dejo el valor de la unica variable usada aqui ya que es una api de testeo de la prueba tecnica:
+   ```sh
+   echo VITE_API_URL=https://challenge.egodesign.dev > .env
+   ```
+5. Inicia el servidor de desarrollo:
    ```sh
    npm run dev
    ```
