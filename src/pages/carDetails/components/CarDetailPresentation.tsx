@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material"
+import { CarDetail } from "../../../types/carTypes"
 
-const CarDetailPresentation = ({car}: {car: any}) => {
+const CarDetailPresentation = ({car}: {car: CarDetail}) => {
   return (
     <div
       className="cardDetailPresentationContainer"
@@ -19,7 +20,7 @@ const CarDetailPresentation = ({car}: {car: any}) => {
             }
           }}
         >
-          <img className="car_card" src={car.detailedImage || car.image} alt={car.name} />
+          <img className="car_card" src={car.photo || car.thumbnail} alt={car.name} />
         </Box>
         <Box
           sx={{
@@ -32,11 +33,9 @@ const CarDetailPresentation = ({car}: {car: any}) => {
           <Box sx={{ width: '475px'}}>
             <Typography sx={{ fontWeight: 600, fontSize: '20px', marginBottom: '8px' }}>{car.name}</Typography>
             <Typography sx={{ fontWeight: 600, fontSize: '50px', lineHeight: '57px', marginBottom: '37px' }}>
-              Preparada para cualquier desafío
+              {car.title}
             </Typography>
-            <Typography sx={{ fontWeight: 400, fontSize: '16px' }}>
-              Texto lorem ipsum dolor sit amet orem ipsum dolor sit amet. lorem ipsum dolor sit amet orem ipsum dolor sit amet lorem ipsum dolor sit amet orem ipsum dolor sit amet.
-            </Typography>
+            <Typography dangerouslySetInnerHTML={{ __html: car.description }} sx={{ fontWeight: 400, fontSize: '16px' }} />
           </Box>
         </Box>
       </div>

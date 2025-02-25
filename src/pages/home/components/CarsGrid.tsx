@@ -1,9 +1,12 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Car } from "../types/carTypes";
+import { Car } from "../../../types/carTypes";
 
-const CarsGrid = ({cars}: {cars: Car[]}) => {
+const CarsGrid = ({cars, isLoading, error}: {cars: Car[]; isLoading: boolean; error: string | null}) => {
   const navigate = useNavigate();
+
+  if (error) return <Typography>Error: {error}</Typography>;
+  if (isLoading) return <Typography>Cargando...</Typography>;
   
   return (
     <Grid container spacing={3}>
@@ -21,7 +24,7 @@ const CarsGrid = ({cars}: {cars: Car[]}) => {
           >
             <Typography
               variant="h6"
-              sx={{ fontWeight: 600, fontSize: '28px', textAlign: 'center', color: car.starred ? '#EB0A1E' : '#000000' }}
+              sx={{ fontWeight: 600, fontSize: '28px', textAlign: 'center', color: '#000000' }}
             >
               {car.name}
             </Typography>
@@ -36,7 +39,7 @@ const CarsGrid = ({cars}: {cars: Car[]}) => {
               height: '140px',
               overflow: 'hidden'
             }}>
-              <img className="car_card" alt={car.name} src={car.image}></img>
+              <img className="car_card" alt={car.name} src={car.thumbnail}></img>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', height: '34px' }}>
               <Button
